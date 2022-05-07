@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script src="js/socket.io.min.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/axios.min.js"></script>
   <script defer src="./js/main.js"></script>
   <script>
     $user = checkLoggedIn();
   </script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body style="margin: 0; padding: 0;">
   <div style="width: 100%">
     <video width="100%" id="myVid" data-lastTime="0">
-      <source src="http://localhost:3000/vids/1.mp4" type="video/mp4">
+      <!-- <source src="http://localhost:3000/vids/1.mp4" type="video/mp4"> -->
+      <source src="vids/11.mp4" type="video/mp4">
     </video>
 
     <div id="controllers">
