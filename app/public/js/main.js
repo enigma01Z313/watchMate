@@ -58,12 +58,14 @@ const updates = {
 
 const upadteButton = (newData) => {
   const btn = document.getElementById("playPause");
+  const iconElem = btn.children[0];
 
   newData = !newData ? updates[btn.classList[0]] : newData;
 
   btn.classList.remove(newData[0]);
   btn.classList.add(newData[1]);
-  btn.innerText = newData[2];
+  iconElem.classList.remove(`fa-${newData[0]}`);
+  iconElem.classList.add(`fa-${newData[1]}`);
 
   return newData[0];
 };
@@ -110,8 +112,44 @@ socket.on("doReset", () => {
   document.getElementById("myVid").load();
 });
 
-// setTimeout(function () {
-//   console.log("ssssssss");
-//   document.getElementById("myVid").currentTime = 0;
-//   // document.getElementById("myVid").play();
-// }, 8000);
+//update time bar
+const updateTime = 100;
+const myVid = document.getElementById("myVid");
+setInterval(function () {
+  const seenPecent = (myVid.currentTime / myVid.duration) * 100;
+
+  document.getElementById("pin").style.width = `${seenPecent}%`;
+}, updateTime);
+
+function jumpTime(e) {
+  const myVid = document.getElementById("myVid");
+  const changeTime = parseInt(e.currentTarget.getAttribute("data-time"));
+
+  const newTime = e.currentTarget.classList.contains("forward")
+    ? myVid.currentTime + changeTime < myVid.duration
+      ? myVid.currentTime + changeTime
+      : myVid.duration
+    : myVid.currentTime - changeTime > 0
+    ? myVid.currentTime - changeTime
+    : 0;
+
+  if (newTime >= 10) {
+    sendSocketAction({
+      action: "pause",
+      time: newTime,
+    });
+  } else {
+    resetMV();
+  }
+
+  setTimeout(() => {
+    sendSocketAction({
+      action: "play",
+    });
+  }, 200);
+}
+
+function changeVolume(e) {
+  const value = e.target.value / 100;
+  document.getElementById("myVid").volume = value;
+}

@@ -4,24 +4,46 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+  <script src="js/socket.io.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="./js/main.js"></script>
+  <script defer src="./js/main.js"></script>
   <script>
     $user = checkLoggedIn();
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body style="margin: 0; padding: 0;">
-  <video id="myVid" width="90%" controls>
-    <!-- <source src="http://localhost:3000/video/1.mp4" type="video/mp4"> -->
-    <source src="http://localhost:3000/vids/1.mp4" type="video/mp4">
-  </video>
+  <div style="width: 100%">
+    <video width="100%" id="myVid" data-lastTime="0">
+      <source src="http://localhost:3000/vids/1.mp4" type="video/mp4">
+    </video>
 
-  <div>
-    <button onclick="resetMV()" id="reset" style="font-size: 40px">Reset</button>
-    <button onclick="playPauseMV()" id="playPause" class="play" style="font-size: 40px">
-      Play
-    </button>
+    <div id="controllers">
+      <div class="pipe">
+        <div id="pin" class="pin"></div>
+      </div>
+      <div class="buttons">
+        <div class="backward" onclick="jumpTime(event)" data-time="15"><i class="fa fa-backward"></i></div>
+        <div id="playPause" class="play" onclick="playPauseMV()">
+          <i class="fa fa-play"></i>
+        </div>
+        <div class="forward" onclick="jumpTime(event)" data-time="15"><i class="fa fa-forward"></i></div>
+      </div>
+      <div class="volume">
+        <input type="range" onchange="changeVolume(event)" id="volume" min="0" max="100" step="1">
+      </div>
+    </div>
+    <!-- <button onclick="resetMV()" id="reset" style="font-size: 40px">Reset</button> -->
+
   </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
