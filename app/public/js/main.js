@@ -1,4 +1,5 @@
-const mainServerUrl = "http://localhost:3000";
+// const mainServerUrl = "http://localhost:3000";
+const mainServerUrl = "http://67.43.234.92:3000";
 const mainApiUrl = `${mainServerUrl}/api`;
 const socket = io(mainServerUrl);
 
