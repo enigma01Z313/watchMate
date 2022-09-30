@@ -1,1 +1,214 @@
-:root{--main-bg-color: #333;--buttons-main-1: rgba(255, 97, 163, 1);--buttons-main-2: rgba(254, 132, 121, 1)}body{background:var(--main-bg-color)}#controllers{position:relative}#controllers .pipe{background:#ccc;height:5px;width:100%;position:relative}#controllers .pipe .pin{position:absolute;width:40%;background:linear-gradient(90deg, var(--buttons-main-1) 23%, var(--buttons-main-2) 78%);height:100%;top:0;left:0}#controllers .pipe .pin:after{content:"";display:block;right:0;top:0;width:15px;height:15px;background:var(--buttons-main-1);position:absolute;border-radius:50%;transform:translate(50%, calc((50% - 3px) * -1))}#controllers .buttons{display:flex;justify-content:center;align-items:center;margin-top:15px}#controllers .buttons>div{display:flex;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(90deg, var(--buttons-main-1) 23%, var(--buttons-main-2) 78%);height:40px;width:40px;cursor:pointer}#controllers .buttons i{font-size:21px;color:#fff}#controllers .buttons #playPause{width:60px;height:60px;margin:0 10px}#controllers .buttons #playPause i{font-size:25px}#controllers .buttons #playPause i.fa-play{position:relative;left:3px}#controllers .volume{position:absolute;bottom:20px;right:10px}#controllers .volume input{overflow:hidden;width:100px;-webkit-appearance:none;background-color:#9a905d;border-radius:5px}#controllers .volume input::-webkit-slider-runnable-track{height:10px;-webkit-appearance:none;color:#13bba4;margin-top:-1px}#controllers .volume input::-webkit-slider-thumb{width:10px;-webkit-appearance:none;height:10px;cursor:pointer;background:#434343;box-shadow:-80px 0 0 80px #43e5f7}#controllers .volume input::-moz-range-progress{background-color:#43e5f7}#controllers .volume input::-moz-range-track{background-color:#9a905d}#controllers .volume input::-ms-fill-lower{background-color:#43e5f7}#controllers .volume input::-ms-fill-upper{background-color:#9a905d}/*# sourceMappingURL=main.css.map */
+:root {
+  --main-bg-color: #333;
+  --buttons-main-1: rgba(255, 97, 163, 1);
+  --buttons-main-2: rgba(254, 132, 121, 1);
+}
+
+video::-webkit-media-controls {
+  display: none;
+}
+
+body {
+  background: var(--main-bg-color);
+}
+
+#videoPlayer {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+}
+#videoPlayer #videoWrapper {
+  position: relative;
+}
+#videoPlayer #videoWrapper > div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#videoPlayer #controllers {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+#videoPlayer #controllers .pipe {
+  background: #ccc;
+  height: 5px;
+  width: calc(100% - 15px);
+  left: 7.5px;
+  position: relative;
+}
+#videoPlayer #controllers .pipe .pin {
+  position: absolute;
+  width: 40%;
+  background: linear-gradient(90deg, var(--buttons-main-1) 23%, var(--buttons-main-2) 78%);
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+#videoPlayer #controllers .pipe .pin:after {
+  content: "";
+  display: block;
+  right: 0;
+  top: 0;
+  width: 15px;
+  height: 15px;
+  background: var(--buttons-main-1);
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(50%, calc((50% - 3px) * -1));
+}
+#videoPlayer #controllers .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+#videoPlayer #controllers .buttons > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--buttons-main-1) 23%, var(--buttons-main-2) 78%);
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+#videoPlayer #controllers .buttons i {
+  font-size: 21px;
+  color: #fff;
+}
+#videoPlayer #controllers .buttons #playPause {
+  width: 60px;
+  height: 60px;
+  margin: 0 10px;
+}
+#videoPlayer #controllers .buttons #playPause i {
+  font-size: 25px;
+}
+#videoPlayer #controllers .buttons #playPause i.fa-play {
+  position: relative;
+  left: 3px;
+}
+#videoPlayer #controllers .volume {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+}
+#videoPlayer #controllers .volume input {
+  overflow: hidden;
+  width: 100px;
+  -webkit-appearance: none;
+  background-color: #9a905d;
+  border-radius: 5px;
+}
+#videoPlayer #controllers .volume input::-webkit-slider-runnable-track {
+  height: 10px;
+  -webkit-appearance: none;
+  color: #13bba4;
+  margin-top: -1px;
+}
+#videoPlayer #controllers .volume input::-webkit-slider-thumb {
+  width: 10px;
+  -webkit-appearance: none;
+  height: 10px;
+  cursor: pointer;
+  background: #434343;
+  box-shadow: -80px 0 0 80px #43e5f7;
+}
+#videoPlayer #controllers .volume input::-moz-range-progress {
+  background-color: #43e5f7;
+}
+#videoPlayer #controllers .volume input::-moz-range-track {
+  background-color: #9a905d;
+}
+#videoPlayer #controllers .volume input::-ms-fill-lower {
+  background-color: #43e5f7;
+}
+#videoPlayer #controllers .volume input::-ms-fill-upper {
+  background-color: #9a905d;
+}
+#videoPlayer #controllers .fullScreen {
+  --border-width: 3px;
+  cursor: pointer;
+  transform: scale(1);
+  transition: all 0.35s;
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  width: 30px;
+  height: 26px;
+}
+#videoPlayer #controllers .fullScreen > div:first-child:before, #videoPlayer #controllers .fullScreen > div:first-child:after, #videoPlayer #controllers .fullScreen > div:last-child:before, #videoPlayer #controllers .fullScreen > div:last-child:after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 4px;
+  border-style: solid;
+  border-color: #fff;
+  border-width: 0;
+  transition: all 0.35s;
+}
+#videoPlayer #controllers .fullScreen > div:first-child:before {
+  left: 0;
+  top: 0;
+  border-left-width: var(--border-width);
+  border-top-width: var(--border-width);
+}
+#videoPlayer #controllers .fullScreen > div:first-child:after {
+  right: 0;
+  top: 0;
+  border-right-width: var(--border-width);
+  border-top-width: var(--border-width);
+}
+#videoPlayer #controllers .fullScreen > div:last-child:before {
+  left: 0;
+  bottom: 0;
+  border-left-width: var(--border-width);
+  border-bottom-width: var(--border-width);
+}
+#videoPlayer #controllers .fullScreen > div:last-child:after {
+  right: 0;
+  bottom: 0;
+  border-right-width: var(--border-width);
+  border-bottom-width: var(--border-width);
+}
+#videoPlayer #controllers .fullScreen:hover {
+  transform: scale(1.2);
+}
+#videoPlayer #controllers .fullScreen.fullScreenMode {
+  transform: scale(0.9);
+}
+#videoPlayer #controllers .fullScreen.fullScreenMode > div:first-child:before, #videoPlayer #controllers .fullScreen.fullScreenMode > div:first-child:after, #videoPlayer #controllers .fullScreen.fullScreenMode > div:last-child:before, #videoPlayer #controllers .fullScreen.fullScreenMode > div:last-child:after {
+  transform: rotate(180deg);
+}
+#videoPlayer #controllers .fullScreen.fullScreenMode:hover {
+  transform: scale(0.7);
+}
+#videoPlayer.fullScreenMode #controllers {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  flex-direction: column-reverse;
+}
+#videoPlayer.fullScreenMode #controllers .buttons, #videoPlayer.fullScreenMode #controllers .volume, #videoPlayer.fullScreenMode #controllers .fullScreen {
+  opacity: 0;
+  transition: all 0.35s;
+}
+#videoPlayer.fullScreenMode #controllers .buttons {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+#videoPlayer.fullScreenMode #controllers .volume {
+  bottom: 40px;
+}
+#videoPlayer.fullScreenMode #controllers .fullScreen {
+  bottom: 35px;
+}
+#videoPlayer.fullScreenMode #controllers.show .buttons, #videoPlayer.fullScreenMode #controllers.show .volume, #videoPlayer.fullScreenMode #controllers.show .fullScreen {
+  opacity: 1;
+}
+
+/*# sourceMappingURL=main.css.map */

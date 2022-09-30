@@ -12,8 +12,8 @@ const io = socketio(server, {
   },
 });
 
-// const host = "http://67.43.234.92/"
-const host = "http://localhost";
+const host = "https://67.43.234.92"
+// const host = "http://localhost";
 server.listen(port, () => {
   console.log(`Api server is running on: ${host}:${port}`);
 

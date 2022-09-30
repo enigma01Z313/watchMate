@@ -1,5 +1,5 @@
 // const mainServerUrl = "http://localhost:3000";
-const mainServerUrl = "http://67.43.234.92:3000";
+const mainServerUrl = "https://67.43.234.92:3000";
 const mainApiUrl = `${mainServerUrl}/api`;
 const socket = io(mainServerUrl);
 
@@ -113,14 +113,22 @@ socket.on("doReset", () => {
   document.getElementById("myVid").load();
 });
 
-//update time bar
-const updateTime = 100;
-const myVid = document.getElementById("myVid");
-setInterval(function () {
-  const seenPecent = (myVid.currentTime / myVid.duration) * 100;
+function moveVide(time) {
+  if (time >= 10) {
+    sendSocketAction({
+      action: "pause",
+      time,
+    });
+  } else {
+    resetMV();
+  }
 
-  document.getElementById("pin").style.width = `${seenPecent}%`;
-}, updateTime);
+  setTimeout(() => {
+    sendSocketAction({
+      action: "play",
+    });
+  }, 200);
+}
 
 function jumpTime(e) {
   const myVid = document.getElementById("myVid");
@@ -134,23 +142,47 @@ function jumpTime(e) {
     ? myVid.currentTime - changeTime
     : 0;
 
-  if (newTime >= 10) {
-    sendSocketAction({
-      action: "pause",
-      time: newTime,
-    });
-  } else {
-    resetMV();
-  }
-
-  setTimeout(() => {
-    sendSocketAction({
-      action: "play",
-    });
-  }, 200);
+  moveVide(newTime);
 }
 
 function changeVolume(e) {
   const value = e.target.value / 100;
   document.getElementById("myVid").volume = value;
 }
+
+function changeViewMode(e) {
+  if (!e.currentTarget.classList.contains("fullScreenMode")) {
+    e.currentTarget.classList.add("fullScreenMode");
+    document.getElementById("videoPlayer").classList.add("fullScreenMode");
+    document.getElementById("videoPlayer").requestFullscreen();
+  } else {
+    e.currentTarget.classList.remove("fullScreenMode");
+    document.getElementById("videoPlayer").classList.remove("fullScreenMode");
+    document.exitFullscreen();
+  }
+}
+
+function showContolls(e) {
+  if (e.currentTarget.classList.contains("fullScreenMode")) {
+    document
+      .getElementById("videoPlayer")
+      .setAttribute("moveTime", new Date().getTime());
+    document.getElementById("controllers").classList.add("show");
+  }
+}
+
+document.body.onkeyup = function (e) {
+  const changeTime = 15;
+  console.log(e.keyCode);
+  if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
+    playPauseMV();
+  } else if (e.keyCode == 39) {
+    const myVid = document.getElementById("myVid");
+    const newTime = Math.min(myVid.duration, myVid.currentTime + 15);
+    moveVide(newTime);
+  } else if (e.keyCode == 37) {
+    const myVid = document.getElementById("myVid");
+    const newTime = Math.max(0, myVid.currentTime - 15);
+    moveVide(newTime);
+  }
+};
