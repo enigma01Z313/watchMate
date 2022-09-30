@@ -1,5 +1,5 @@
 // const mainServerUrl = "http://localhost:3000";
-const mainServerUrl = "https://67.43.234.92:3000";
+const mainServerUrl = "https://watchmate.farzinahmadi.com";
 const mainApiUrl = `${mainServerUrl}/api`;
 const socket = io(mainServerUrl);
 
